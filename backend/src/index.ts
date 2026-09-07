@@ -19,6 +19,18 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Middleware for API route prefix normalizer on Vercel
+app.use((req, res, next) => {
+  if (req.url.startsWith('/api')) {
+    // Already prefixed
+    next();
+  } else {
+    // Add /api prefix for internal routing
+    req.url = '/api' + req.url;
+    next();
+  }
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
@@ -27,7 +39,7 @@ app.use('/api/store-owner', storeOwnerRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({ status: 'ok', timestamp: new Date().toISOString(), env: process.env.NODE_ENV });
 });
 
 // Global Error Handler
@@ -36,6 +48,11 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Store Rating Backend Server running at http://localhost:${PORT}`);
-});
+// Only listen on port when not running as a Vercel serverless function
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Store Rating Backend Server running at http://localhost:${PORT}`);
+  });
+}
+
+export default app;
