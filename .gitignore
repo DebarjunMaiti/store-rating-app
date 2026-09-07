@@ -18,6 +18,7 @@ build/
 *.db-journal
 backend/prisma/*.db-journal
 !backend/prisma/dev.db
+!prisma/dev.db
 
 # Logs
 *.log

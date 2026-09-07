@@ -9,8 +9,8 @@
     "seed": "cd backend && npm run db:seed",
     "build:backend": "cd backend && npm run build",
     "build:frontend": "cd frontend && npm run build",
-    "build": "npm run build:backend && npm run build:frontend",
-    "vercel-build": "cd backend && npx prisma generate && npx prisma db push --accept-data-loss && npm run db:seed && cd .. && cd frontend && npm install && npm run build"
+    "build": "npx prisma generate && cd frontend && npm install && npm run build",
+    "vercel-build": "npx prisma generate && cd frontend && npm install && npm run build"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
