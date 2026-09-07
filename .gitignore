@@ -1,0 +1,31 @@
+﻿# Dependencies
+node_modules/
+*/node_modules/
+
+# Production builds
+dist/
+build/
+*/dist/
+*/build/
+
+# Environment files
+.env
+.env.local
+*.env
+
+# SQLite local databases
+*.db
+*.db-journal
+backend/prisma/*.db
+backend/prisma/*.db-journal
+
+# Logs
+*.log
+logs/
+
+# Editor & OS files
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+*.tsbuildinfo
