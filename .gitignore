@@ -1,4 +1,4 @@
-﻿# Dependencies
+# Dependencies
 node_modules/
 */node_modules/
 
@@ -16,8 +16,8 @@ build/
 # SQLite local databases
 *.db
 *.db-journal
-backend/prisma/*.db
 backend/prisma/*.db-journal
+!backend/prisma/dev.db
 
 # Logs
 *.log
@@ -29,3 +29,5 @@ logs/
 Thumbs.db
 .DS_Store
 *.tsbuildinfo
+.vercel
+.env*
